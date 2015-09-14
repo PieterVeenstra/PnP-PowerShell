@@ -17,6 +17,6 @@ Parameter|Type|Required|Description
 ##Examples
 
 ###Example 1
-    PS:> Get-SPOWebPartXml -PageUrl "/sites/demo/sitepages/home.aspx" -Identity a2875399-d6ff-43a0-96da-be6ae5875f82
+    PS:> Get-SPOWebPartXml -ServerRelativePageUrl "/sites/demo/sitepages/home.aspx" -Identity a2875399-d6ff-43a0-96da-be6ae5875f82
 Returns the webpart XML for a given webpart on a page.
 <!-- Ref: D9FF86CEB8E35A66E42337F2552BED44 -->
