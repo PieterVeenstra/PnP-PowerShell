@@ -3,6 +3,7 @@ using System.IO;
 using System.Management.Automation;
 using Microsoft.SharePoint.Client;
 using OfficeDevPnP.PowerShell.CmdletHelpAttributes;
+using OfficeDevPnP.Core.Utilities;
 
 namespace OfficeDevPnP.PowerShell.Commands
 {
@@ -10,11 +11,11 @@ namespace OfficeDevPnP.PowerShell.Commands
     [CmdletHelp("Uploads a file to Web", 
         Category = CmdletHelpCategory.Webs)]
     [CmdletExample(
-        Code = @"PS:> Add-SPOFile -Path c:\temp\company.master -Folder ""_catalogs/masterpage", 
+        Code = @"PS:> Add-SPOFile -Path c:\temp\company.master -Folder ""_catalogs/masterpage""", 
         Remarks = "This will upload the file company.master to the masterpage catalog",
         SortOrder = 1)]
     [CmdletExample(
-        Code = @"PS:> Add-SPOFile -Path .\displaytemplate.html -Folder ""_catalogs/masterpage/display templates/test", 
+        Code = @"PS:> Add-SPOFile -Path .\displaytemplate.html -Folder ""_catalogs/masterpage/display templates/test""", 
         Remarks = "This will upload the file displaytemplate.html to the test folder in the display templates folder. If the test folder not exists it will create it.",
         SortOrder = 2)]
     public class AddFile : SPOWebCmdlet
@@ -77,7 +78,7 @@ namespace OfficeDevPnP.PowerShell.Commands
                 }
             }
 
-            folder.UploadFile(new FileInfo(Path).Name, Path, true);
+            var file = folder.UploadFile(new FileInfo(Path).Name, Path, true);
 
             if (Checkout)
                 SelectedWeb.CheckInFile(fileUrl, CheckinType.MajorCheckIn, "");
@@ -87,6 +88,8 @@ namespace OfficeDevPnP.PowerShell.Commands
 
             if (Approve)
                 SelectedWeb.ApproveFile(fileUrl, PublishComment);
+
+            WriteObject(file);
         }
     }
 }
