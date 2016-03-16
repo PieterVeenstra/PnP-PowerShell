@@ -88,6 +88,8 @@ namespace OfficeDevPnP.PowerShell.Tests
             {
                 var results = scope.ExecuteCommand("Add-SPOContentType",
                     new CommandParameter("Name", CTName4),
+                    new CommandParameter("Description", "This is the description of the content type"),
+                    new CommandParameter("ContentTypeID", "0x01010010AFE1111D664A55B9D45F9712E7B827"),
                     new CommandParameter("Group", "UnitTestCTGroup"));
 
                 Assert.IsTrue(results.Any());
