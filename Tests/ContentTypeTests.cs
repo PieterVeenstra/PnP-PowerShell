@@ -172,9 +172,29 @@ namespace OfficeDevPnP.PowerShell.Tests
         {
             using (var scope = new PSTestScope(true))
             {
-
+               
                 var results = scope.ExecuteCommand("Get-SPOContentType",
                     new CommandParameter("List", "Documents"));
+
+                Assert.IsTrue(results.Any());
+
+                Assert.IsTrue(results[0].BaseObject.GetType() == typeof(Microsoft.SharePoint.Client.ContentType));
+
+            }
+        }
+
+        [TestMethod]
+        public void GetListContentTypeTest2()
+        {
+            using (var scope = new PSTestScope(true))
+            {
+                var script = @"$lists=Get-SPOList;
+                               foreach($list in $lists)
+                               {
+                                   Get-SPOContentType -List  $list
+                               }";
+
+                var results = scope.ExecuteScript(script);
 
                 Assert.IsTrue(results.Any());
 
