@@ -39,7 +39,7 @@ namespace OfficeDevPnP.PowerShell.Tests
                 var results = scope.ExecuteCommand("Get-SPOContext");
 
                 Assert.IsTrue(results.Count == 1);
-                Assert.IsTrue(results[0].BaseObject.GetType() == typeof(Microsoft.SharePoint.Client.ClientContext));
+                Assert.IsTrue(results[0].BaseObject.GetType().BaseType == typeof(Microsoft.SharePoint.Client.ClientContext));
 
             }
         }
